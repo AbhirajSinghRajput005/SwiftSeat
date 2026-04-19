@@ -13,11 +13,16 @@ export default {
           200: '#ffc7c2',
           300: '#ff9f96',
           400: '#ff695c',
-          500: '#ff4d3d', // Primary Coral
-          600: '#e64537',
+          500: '#FF5F6D', // New Primary Coral Start
+          600: '#FFC371', // New Primary Coral End (for gradients)
           700: '#bf3a2e',
           800: '#992e25',
           900: '#7d261e',
+        },
+        navy: {
+          charcoal: '#1A202C', // Deep navy-charcoal
+          800: '#2D3748',
+          900: '#171923',
         },
         accent: {
           50: '#eff6ff',
@@ -41,7 +46,7 @@ export default {
           600: '#94A3B8',
           700: '#64748B',
           800: '#475569',
-          900: '#1A1D23',
+          900: '#1A202C', // Updated to navy-charcoal
         },
         success: {
           light: '#d4edda',
@@ -60,21 +65,25 @@ export default {
         },
       },
       fontFamily: {
-        heading: ['Outfit', 'sans-serif'],
+        geist: ['Geist', 'Inter', 'sans-serif'],
+        'geist-black': ['Geist Black', 'Inter', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
       },
       boxShadow: {
-        'card': '0 2px 8px rgba(0, 0, 0, 0.08)',
-        'card-hover': '0 8px 24px rgba(0, 0, 0, 0.12)',
-        'elevated': '0 4px 16px rgba(0, 0, 0, 0.1)',
-        'navbar': '0 1px 4px rgba(0, 0, 0, 0.06)',
-        'button': '0 2px 4px rgba(214, 48, 49, 0.3)',
-        'button-hover': '0 4px 12px rgba(214, 48, 49, 0.4)',
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'soft-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        'premium': '0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 15px -5px rgba(0, 0, 0, 0.05)',
+        'card': '0 2px 8px rgba(0, 0, 0, 0.05)',
+        'card-hover': '0 20px 40px rgba(0, 0, 0, 0.1)',
+        'elevated': '0 20px 50px rgba(0, 0, 0, 0.15)',
+        'navbar': '0 4px 20px rgba(0, 0, 0, 0.03)',
+        'button': '0 4px 14px 0 rgba(255, 95, 109, 0.39)',
+        'button-hover': '0 6px 20px rgba(255, 95, 109, 0.23)',
       },
       borderRadius: {
-        'card': '12px',
-        'button': '10px',
-        'input': '8px',
+        'card': '24px',
+        'button': '14px',
+        'input': '12px',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',
@@ -88,7 +97,8 @@ export default {
         'confetti': 'confetti 0.8s ease-out forwards',
         'counter': 'counter 2s ease-out forwards',
         'check-mark': 'checkMark 0.5s ease-out forwards',
-        'float': 'float 3s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'shine': 'shine 2s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -131,7 +141,11 @@ export default {
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        shine: {
+          '0%': { left: '-100%' },
+          '100%': { left: '100%' },
         },
       },
       screens: {
@@ -141,3 +155,4 @@ export default {
   },
   plugins: [],
 }
+

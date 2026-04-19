@@ -91,62 +91,70 @@ export default function SearchResults() {
     return (
       <div className="section-container py-20 text-center">
         <AlertCircle className="w-16 h-16 text-error mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-surface-900 mb-2">Oops! Something went wrong</h2>
-        <p className="text-surface-600 mb-6">{error}</p>
-        <button onClick={() => window.location.reload()} className="btn-primary">Try Again</button>
+        <h2 className="text-4xl font-black text-navy-charcoal mb-4 tracking-tight">Oops! Something went wrong</h2>
+        <p className="text-surface-600 mb-8 max-w-md mx-auto">{error}</p>
+        <button onClick={() => window.location.reload()} className="btn-primary px-10">Try Again</button>
       </div>
     )
   }
 
   return (
-    <div className="bg-surface-100 min-h-screen pb-20">
-      {/* Top Fixed Search Bar */}
-      <div className="bg-white border-b border-surface-200 py-4 sticky top-16 z-30 shadow-sm">
-        <div className="section-container flex items-center gap-4">
-          <button onClick={() => navigate('/')} className="p-2 hover:bg-surface-100 rounded-full text-surface-600">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <div className="flex-1">
-            <h1 className="text-lg font-bold text-surface-900">
-              {from} to {to}
-            </h1>
-            <p className="text-xs text-surface-500 font-medium">{formatDate(date)}</p>
+    <div className="bg-surface-50 min-h-screen pb-32">
+      {/* Top Fixed Search Bar - Refined Glass */}
+      <div className="fixed top-28 left-0 right-0 z-40 px-6 sm:px-8 lg:px-12 pointer-events-none">
+        <div className="max-w-7xl mx-auto glass rounded-[24px] pointer-events-auto shadow-premium border-white/40">
+          <div className="flex items-center gap-6 h-20 px-8">
+            <button onClick={() => navigate('/')} className="w-10 h-10 bg-white shadow-sm rounded-full flex items-center justify-center text-navy-charcoal hover:bg-brand-500 hover:text-white transition-all">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <div className="flex-1">
+              <div className="flex items-center gap-3">
+                <h1 className="text-xl font-black text-navy-charcoal tracking-tight">
+                  {from}
+                </h1>
+                <ChevronRight className="w-4 h-4 text-surface-400" />
+                <h1 className="text-xl font-black text-navy-charcoal tracking-tight">
+                  {to}
+                </h1>
+              </div>
+              <p className="subheader mt-1">{formatDate(date)}</p>
+            </div>
+            <div className="hidden lg:block">
+               <button onClick={() => navigate('/')} className="btn-secondary py-2 px-6 rounded-full text-sm border-0">Modify Search</button>
+            </div>
           </div>
-          <button className="md:hidden btn-outline py-1 px-3 text-xs flex items-center gap-1">
-            <Filter className="w-3 h-3" /> Filter
-          </button>
         </div>
       </div>
 
-      <div className="section-container py-8 flex flex-col lg:flex-row gap-8">
+      <div className="section-container pt-52 flex flex-col lg:flex-row gap-12">
         {/* Filters Sidebar */}
-        <aside className="hidden lg:block w-72 flex-shrink-0 space-y-6">
-          <div className="bg-white p-6 rounded-2xl shadow-card border border-surface-200">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-bold text-surface-900 flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-brand-500" /> Filters
+        <aside className="hidden lg:block w-80 flex-shrink-0 space-y-8">
+          <div className="bg-white p-8 rounded-[32px] shadow-soft border-0">
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-xl font-black text-navy-charcoal flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5 text-brand-500" /> Filters
               </h3>
               <button 
                 onClick={() => setFilters({ busTypes: [], operators: [], departureTimes: [], maxPrice: 2000 })}
-                className="text-xs font-bold text-brand-500 hover:text-brand-600"
+                className="text-xs font-black text-brand-500 hover:text-brand-600 uppercase tracking-widest"
               >
-                Clear All
+                Reset
               </button>
             </div>
 
             {/* Departure Time */}
-            <div className="mb-8">
-              <h4 className="text-xs font-bold text-surface-400 uppercase tracking-widest mb-4">Departure Time</h4>
-              <div className="grid grid-cols-2 gap-2">
+            <div className="mb-10">
+              <h4 className="subheader mb-5">Departure Time</h4>
+              <div className="grid grid-cols-2 gap-3">
                 {['Morning', 'Afternoon', 'Evening', 'Night'].map(time => (
                   <button
                     key={time}
                     onClick={() => toggleTime(time.toLowerCase())}
                     className={classNames(
-                      "py-2 px-1 rounded-lg text-[10px] font-bold border transition-all text-center",
+                      "py-3 px-2 rounded-xl text-xs font-black transition-all border-0 shadow-sm",
                       filters.departureTimes.includes(time.toLowerCase())
-                        ? "bg-brand-500 border-brand-500 text-white"
-                        : "bg-white border-surface-200 text-surface-600 hover:border-brand-500"
+                        ? "bg-brand-500 text-white shadow-brand-200"
+                        : "bg-surface-50 text-surface-600 hover:bg-surface-100"
                     )}
                   >
                     {time}
@@ -156,18 +164,24 @@ export default function SearchResults() {
             </div>
 
             {/* Bus Type */}
-            <div className="mb-8">
-              <h4 className="text-xs font-bold text-surface-400 uppercase tracking-widest mb-4">Bus Type</h4>
-              <div className="space-y-3">
+            <div className="mb-10">
+              <h4 className="subheader mb-5">Bus Type</h4>
+              <div className="space-y-4">
                 {['Volvo AC', 'AC Sleeper', 'AC Seater', 'Non-AC Sleeper'].map(type => (
-                  <label key={type} className="flex items-center gap-3 cursor-pointer group">
-                    <input 
-                      type="checkbox" 
-                      className="w-4 h-4 rounded border-surface-300 text-brand-500 focus:ring-brand-500"
-                      checked={filters.busTypes.includes(type)}
-                      onChange={() => toggleBusType(type)}
-                    />
-                    <span className="text-sm text-surface-700 group-hover:text-surface-900 transition-colors">{type}</span>
+                  <label key={type} className="flex items-center gap-4 cursor-pointer group">
+                    <div className="relative flex items-center justify-center">
+                      <input 
+                        type="checkbox" 
+                        className="peer sr-only"
+                        checked={filters.busTypes.includes(type)}
+                        onChange={() => toggleBusType(type)}
+                      />
+                      <div className="w-5 h-5 border-2 border-surface-200 rounded-md bg-white peer-checked:bg-brand-500 peer-checked:border-brand-500 transition-all"></div>
+                      <div className="absolute opacity-0 peer-checked:opacity-100 transition-opacity">
+                        <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                      </div>
+                    </div>
+                    <span className="text-sm font-bold text-surface-700 group-hover:text-navy-charcoal transition-colors">{type}</span>
                   </label>
                 ))}
               </div>
@@ -175,9 +189,9 @@ export default function SearchResults() {
 
             {/* Price Range */}
             <div>
-              <div className="flex justify-between items-center mb-4">
-                <h4 className="text-xs font-bold text-surface-400 uppercase tracking-widest">Max Price</h4>
-                <span className="text-xs font-bold text-brand-500">₹{filters.maxPrice}</span>
+              <div className="flex justify-between items-center mb-6">
+                <h4 className="subheader">Max Price</h4>
+                <span className="text-sm font-black text-brand-500">₹{filters.maxPrice}</span>
               </div>
               <input 
                 type="range" 
@@ -186,68 +200,76 @@ export default function SearchResults() {
                 step="50"
                 value={filters.maxPrice}
                 onChange={(e) => setFilters({ ...filters, maxPrice: parseInt(e.target.value) })}
-                className="w-full h-1.5 bg-surface-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
+                className="w-full h-1.5 bg-surface-100 rounded-lg appearance-none cursor-pointer accent-brand-500"
               />
             </div>
           </div>
           
-          <div className="bg-brand-500 p-6 rounded-2xl text-white relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
-             <h4 className="font-bold mb-2">First Booking?</h4>
-             <p className="text-xs text-brand-100 mb-4">Get 20% OFF using code <span className="font-bold text-white">SWIFT20</span></p>
-             <button className="bg-white text-brand-500 text-xs font-bold py-2 px-4 rounded-lg w-full">Apply Now</button>
+          <div className="bg-gradient-to-br from-brand-500 to-brand-600 p-8 rounded-[32px] text-white relative overflow-hidden shadow-premium">
+             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+             <div className="relative z-10">
+               <h4 className="text-xl font-black mb-3">First Booking?</h4>
+               <p className="text-sm text-brand-100 mb-6 font-medium leading-relaxed">Get 20% OFF using code <br /><span className="font-black text-white text-lg">SWIFT20</span></p>
+               <button className="bg-white text-brand-500 text-sm font-black py-4 px-6 rounded-2xl w-full shadow-lg shadow-black/5 hover:scale-[1.02] transition-transform">Apply Coupon</button>
+             </div>
           </div>
         </aside>
 
         {/* Results Main Area */}
-        <main className="flex-1 space-y-4">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-lg font-bold text-surface-900">
-              {loading ? 'Finding buses...' : `${filteredRoutes.length} Buses found`}
+        <main className="flex-1">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 px-2">
+            <h2 className="text-2xl font-black text-navy-charcoal">
+              {loading ? 'Searching for best routes...' : `${filteredRoutes.length} Buses available`}
             </h2>
             {!loading && (
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-surface-500">Sort by:</span>
-                <select className="bg-transparent text-xs font-bold text-surface-900 focus:outline-none cursor-pointer">
-                  <option>Price (Low to High)</option>
-                  <option>Price (High to Low)</option>
-                  <option>Departure (Earliest)</option>
-                  <option>Departure (Latest)</option>
-                  <option>Ratings</option>
+              <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm">
+                <span className="subheader !text-xs">Sort by</span>
+                <select className="bg-transparent text-sm font-black text-navy-charcoal focus:outline-none cursor-pointer">
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Earliest Departure</option>
+                  <option>Latest Departure</option>
+                  <option>Top Rated</option>
                 </select>
               </div>
             )}
           </div>
 
           {loading ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {[1, 2, 3].map(i => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-surface-200 space-y-4">
-                  <div className="flex justify-between">
-                    <div className="h-6 w-48 skeleton"></div>
-                    <div className="h-6 w-24 skeleton"></div>
+                <div key={i} className="bg-white p-8 rounded-[32px] shadow-soft border-0 space-y-6">
+                  <div className="flex justify-between items-center">
+                    <div className="h-8 w-64 skeleton"></div>
+                    <div className="h-8 w-32 skeleton"></div>
                   </div>
-                  <div className="h-12 w-full skeleton"></div>
-                  <div className="h-8 w-32 skeleton"></div>
+                  <div className="h-32 w-full skeleton rounded-3xl"></div>
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 skeleton rounded-xl"></div>
+                    <div className="h-10 w-10 skeleton rounded-xl"></div>
+                    <div className="h-10 w-10 skeleton rounded-xl"></div>
+                  </div>
                 </div>
               ))}
             </div>
           ) : filteredRoutes.length > 0 ? (
-            <div className="space-y-4">
+            <div className="space-y-8 animate-fade-in">
               {filteredRoutes.map(route => (
                 <BusCard key={route._id} route={route} />
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl p-20 text-center border border-surface-200 animate-fade-in">
-              <BusIcon className="w-16 h-16 text-surface-200 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-surface-900 mb-2">No buses found</h3>
-              <p className="text-surface-500 mb-6">We couldn't find any buses for this route on the selected date.</p>
+            <div className="bg-white rounded-[40px] p-24 text-center shadow-soft border-0 animate-fade-in">
+              <div className="w-24 h-24 bg-surface-50 rounded-[32px] flex items-center justify-center mx-auto mb-8">
+                <BusIcon className="w-12 h-12 text-surface-200" />
+              </div>
+              <h3 className="text-3xl font-black text-navy-charcoal mb-4">No buses found</h3>
+              <p className="text-surface-500 mb-10 max-w-sm mx-auto font-medium">We couldn't find any buses for this route on the selected date. Try another date or route.</p>
               <button 
                 onClick={() => navigate('/')} 
-                className="btn-primary"
+                className="btn-primary px-12 py-5 rounded-full"
               >
-                Change Search
+                Modify Search
               </button>
             </div>
           )}
@@ -256,3 +278,4 @@ export default function SearchResults() {
     </div>
   )
 }
+
