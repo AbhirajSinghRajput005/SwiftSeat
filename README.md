@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SwiftSeat – Premium Bus‑Booking Platform
 
 A modern, full‑stack web application that lets users search for bus routes, select seats, and complete bookings with a sleek, glass‑morphism UI and smooth micro‑animations. The project showcases a premium, production‑ready codebase built with a curated tech stack, best‑in‑class development workflows, and comprehensive documentation.
@@ -80,3 +81,7 @@ You should now see the **SwiftSeat** landing page, be able to search for routes,
 ---
 
 *Happy coding!*
+=======
+# SwiftSeat
+SwiftSeat – Premium Bus‑Booking Platform
+>>>>>>> 0a9e053e2bf3f6ba7d157e0299aa4ed6db425fdc
